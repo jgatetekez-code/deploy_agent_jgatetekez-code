@@ -1,5 +1,21 @@
 #!/bin/bash
 
+trap start_archive SIGINT
+
+start_archive() {
+    echo " User trying to interupt the setup"
+    echo "Starting the archiving"
+
+    tar -czf "attendance_tracker_${project_name}_archive.tar.gz" "attendance_tracker_${project_name}"
+
+    echo "Archive created successfully. Now deleteing the incomplete workspace"
+    rm -r "attendance_tracker_${project_name}"
+
+    echo "Incomplete workspace delete. Now exiting..."
+    exit 0
+}
+
+
 echo "Enter project name:"
 read project_name
 
