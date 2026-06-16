@@ -55,3 +55,14 @@ then
 else
     echo "Warning: Python3 is not installed."
 fi
+
+echo "Verifiying presence of all files"
+
+for file in "${project_name}/attendance_checker.py" "${project_name}/Helpers/config.json" "${project_name}/Helpers/assets.csv" "${project_name}/reports/report.log"; do
+    
+    if [ -e "$file" ]; then
+        echo "$file is found in the workspace $project_name"
+    else
+        echo "$file is MISSING in the workspace $project_name"
+    fi
+done
