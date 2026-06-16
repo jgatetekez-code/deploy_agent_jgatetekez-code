@@ -24,3 +24,24 @@ cp project/assets.csv "attendance_tracker_$project_name/Helpers/"
 cp project/config.json "attendance_tracker_$project_name/Helpers/"
 
 cp project/reports.log "attendance_tracker_$project_name/reports/"
+
+read -p "Do you want to update the attendance thresholds (Y/N)? " update_thresholds
+
+if [[ "$update_thresholds" =~ ^[Yy]$ ]]; then
+
+    read -p "Enter warning percentage: " warning_marks
+    read -p "Enter failure percentage: " fail_marks
+
+    sed -i "s/\"warning\": [0-9]*/\"warning\": $warning_marks/" \
+    "attendance_tracker_$project_name/Helpers/config.json"
+
+    sed -i "s/\"failure\": [0-9]*/\"failure\": $fail_marks/" \
+    "attendance_tracker_$project_name/Helpers/config.json"
+
+    echo "Thresholds updated for Warning($warning_marks) and Failure($fail_marks)"
+
+else
+
+    echo "Now using the default thresholds: Warning(75%) and Failure(50%)"
+
+fi
