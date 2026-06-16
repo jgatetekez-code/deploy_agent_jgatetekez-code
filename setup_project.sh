@@ -45,3 +45,13 @@ else
     echo "Now using the default thresholds: Warning(75%) and Failure(50%)"
 
 fi
+
+
+echo "Checking Python installation..."
+
+if python3 --version >/dev/null 2>&1
+then
+    echo "Python3 is installed."
+else
+    echo "Warning: Python3 is not installed."
+fi
